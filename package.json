@@ -1,0 +1,23 @@
+{
+  "name": "caglanurdemir",
+  "version": "1.0.0",
+  "description": "new package generated",
+  "main": "myGallery.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caglanurdemir/myGallery.git"
+  },
+  "keywords": [
+    "node",
+    "npm"
+  ],
+  "author": "Çağla Nur Demir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caglanurdemir/myGallery/issues"
+  },
+  "homepage": "https://github.com/caglanurdemir/myGallery#readme"
+}
