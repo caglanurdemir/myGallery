@@ -1,28 +1,118 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  
-  <body>
-    <h2>Use JavaScript to Show Images</h2>
-    <p>This example writes "Patates!"</p>
-    
-    <p>
-      <input
-        type="file"
-        accept="image/*"
-        name="image"
-        accept="image/png, image/jpeg"
-        id="file"
-        onchange="loadFile(event)"
-      />
-    </p>
-    <p><label for="file" style="cursor: pointer"></label></p>
-    <p><img id="output" width="200" /></p>
 
-    <script src="../myGallery/myGallery.js"></script>
-    <div class="row">
+<head>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <h2>Use JavaScript to Show Images</h2>
+  <p>This example writes "Patates!"</p>
+
+  <div id="myDIV">
+    A div element
+  </div>
+  <script>
+    function createImageElement(src, image) {
+      var containerDiv = document.createElement("div");
+
+      var newImg = document.createElement(image);
+      newImg.src = src;
+      newImg.id = "imageResize";
+
+      var text = document.createElement("p");
+      text.innerHTML = "New Text Element";
+
+      containerDiv.appendChild(newImg);
+      containerDiv.appendChild(text);
+
+      containerDiv.id = "caglaCSS";
+
+      document.body.appendChild(containerDiv);
+      console.log(containerDiv);
+    }
+
+    function uploadImage(event) {
+      var image = document.getElementById("output");
+      console.log(event.target.files);
+
+      caglaSrc = URL.createObjectURL(event.target.files[0]);
+      createImageElement(caglaSrc, `img`);
+    }
+  </script>
+  <p>
+    <input type="file" accept="image/*" name="image" accept="image/png, image/jpeg" id="file"
+      onchange="uploadImage(event)" />
+  </p>
+  <button onclick="createImageElement(`https:cdn.jotfor.ms/assets/img/memberkit/user_guide_images/f1.png?v=0.2`,`img`)"
+    ; style="float: left; flex-wrap: wrap;" ;>
+    Image
+  </button>
+
+  <!-- --------------The Old Testing Code-------------- -->
+
+  <!-- <p>
+    <input type="file" accept="image/*" name="image" accept="image/png, image/jpeg" id="file"
+      onchange="loadFile(event)" />
+  </p>
+  <p><label for="file" style="cursor: pointer"></label></p>
+  <p><img id="output" width="200" /></p> -->
+
+  <!-- <script src="./node_modules/masonry-layout/dist/masonry.pkgd.min.js"></script> -->
+  <!-- <div class="grid">
+    <div class="grid-item">First</div>
+    <div class="grid-item grid-item--width2">Second</div>
+    <div class="grid-item">Third</div>
+    <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'></div>
+  </div>
+  <script>
+    var elem = document.querySelector('.grid');
+    var msnry = new Masonry(elem, {
+      // options
+      itemSelector: '.grid-item',
+      columnWidth: 200
+    });
+
+    // element argument can be a selector string
+    //   for an individual element
+    var msnry = new Masonry('.grid', {
+      // options
+    });
+  </script> -->
+  <!-- <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 160 }'>
+    <div class="grid-item">
+      <img src="./image1.jpg">
+    </div>
+    <div class="grid-item grid-item--width2 grid-item--height2">
+      <img src="./image2.jpg">
+    </div>
+    <div class="grid-item grid-item--height3">
+      <img src="./image3.jpg">
+    </div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item grid-item--width3"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item grid-item--width2 grid-item--height3"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--width2 grid-item--height2"></div>
+    <div class="grid-item grid-item--width2"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height3"></div>
+    <div class="grid-item grid-item--height2"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item"></div>
+    <div class="grid-item grid-item--height2"></div>
+    </div>
+
+    <script src="../myGallery/myGallery.js"></script> -->
+  <!-- <div class="row">
       <div class="column">
         <img src="../myGallery/image1.jpg" style="width: 100%" />
       </div>
@@ -32,6 +122,7 @@
       <div class="column">
         <img src="../myGallery/image3.jpg" style="width: 50%" />
       </div>
-    </div>
-  </body>
+    </div> -->
+</body>
+
 </html>

@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/caglanurdemir/myGallery/issues"
   },
-  "homepage": "https://github.com/caglanurdemir/myGallery#readme"
+  "homepage": "https://github.com/caglanurdemir/myGallery#readme",
+  "dependencies": {
+    "masonry-layout": "^4.2.2"
+  }
 }
