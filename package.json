@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/caglanurdemir/myGallery#readme",
   "dependencies": {
+    "axios": "^0.21.0",
     "masonry-layout": "^4.2.2"
   }
 }

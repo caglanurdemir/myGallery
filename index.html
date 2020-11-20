@@ -12,7 +12,9 @@
   <div id="myDIV">
     A div element
   </div>
+
   <script>
+
     function createImageElement(src, image) {
       var containerDiv = document.createElement("div");
 
@@ -20,11 +22,11 @@
       newImg.src = src;
       newImg.id = "imageResize";
 
-      var text = document.createElement("p");
-      text.innerHTML = "New Text Element";
+      // var text = document.createElement("p");
+      // text.innerHTML = "New Text Element";
 
       containerDiv.appendChild(newImg);
-      containerDiv.appendChild(text);
+      // containerDiv.appendChild(text);
 
       containerDiv.id = "caglaCSS";
 
@@ -39,7 +41,19 @@
       caglaSrc = URL.createObjectURL(event.target.files[0]);
       createImageElement(caglaSrc, `img`);
     }
+
+    function apiGetRequest() {
+      axios.get("https://5fb50d82e473ab0016a175c2.mockapi.io/pictureObjects").then((a) => {
+        for (let i = 0; i < a.data.length; i++) {
+          console.log(a.data[i].picture);
+          createImageElement(a.data[i].picture, `img`);
+        }
+      }
+      );
+    }
+
   </script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <p>
     <input type="file" accept="image/*" name="image" accept="image/png, image/jpeg" id="file"
       onchange="uploadImage(event)" />
@@ -48,81 +62,7 @@
     ; style="float: left; flex-wrap: wrap;" ;>
     Image
   </button>
-
-  <!-- --------------The Old Testing Code-------------- -->
-
-  <!-- <p>
-    <input type="file" accept="image/*" name="image" accept="image/png, image/jpeg" id="file"
-      onchange="loadFile(event)" />
-  </p>
-  <p><label for="file" style="cursor: pointer"></label></p>
-  <p><img id="output" width="200" /></p> -->
-
-  <!-- <script src="./node_modules/masonry-layout/dist/masonry.pkgd.min.js"></script> -->
-  <!-- <div class="grid">
-    <div class="grid-item">First</div>
-    <div class="grid-item grid-item--width2">Second</div>
-    <div class="grid-item">Third</div>
-    <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'></div>
-  </div>
-  <script>
-    var elem = document.querySelector('.grid');
-    var msnry = new Masonry(elem, {
-      // options
-      itemSelector: '.grid-item',
-      columnWidth: 200
-    });
-
-    // element argument can be a selector string
-    //   for an individual element
-    var msnry = new Masonry('.grid', {
-      // options
-    });
-  </script> -->
-  <!-- <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 160 }'>
-    <div class="grid-item">
-      <img src="./image1.jpg">
-    </div>
-    <div class="grid-item grid-item--width2 grid-item--height2">
-      <img src="./image2.jpg">
-    </div>
-    <div class="grid-item grid-item--height3">
-      <img src="./image3.jpg">
-    </div>
-    <div class="grid-item grid-item--height2"></div>
-    <div class="grid-item grid-item--width3"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--height2"></div>
-    <div class="grid-item grid-item--width2 grid-item--height3"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--height2"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--width2 grid-item--height2"></div>
-    <div class="grid-item grid-item--width2"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--height2"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--height3"></div>
-    <div class="grid-item grid-item--height2"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item"></div>
-    <div class="grid-item grid-item--height2"></div>
-    </div>
-
-    <script src="../myGallery/myGallery.js"></script> -->
-  <!-- <div class="row">
-      <div class="column">
-        <img src="../myGallery/image1.jpg" style="width: 100%" />
-      </div>
-      <div class="column">
-        <img src="../myGallery/image2.jpg" style="width: 100%" />
-      </div>
-      <div class="column">
-        <img src="../myGallery/image3.jpg" style="width: 50%" />
-      </div>
-    </div> -->
+  <button onclick="apiGetRequest()" ; style="float: left; flex-wrap: wrap;" ;>Api Get Request Button</button>
 </body>
 
 </html>
