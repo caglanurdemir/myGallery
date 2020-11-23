@@ -13,56 +13,98 @@
     A div element
   </div>
 
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
   <script>
 
-    function createImageElement(src, image) {
-      var containerDiv = document.createElement("div");
+    var usersLength = 0;
 
-      var newImg = document.createElement(image);
-      newImg.src = src;
-      newImg.id = "imageResize";
+      function createImageElement(src, image) {
+        var containerDiv = document.createElement("div");
 
-      // var text = document.createElement("p");
-      // text.innerHTML = "New Text Element";
+        var newImg = document.createElement(image);
+        newImg.src = src;
+        newImg.id = "imageResize";
 
-      containerDiv.appendChild(newImg);
-      // containerDiv.appendChild(text);
+        // var text = document.createElement("p");
+        // text.innerHTML = "New Text Element";
 
-      containerDiv.id = "caglaCSS";
+        containerDiv.appendChild(newImg);
+        // containerDiv.appendChild(text);
 
-      document.body.appendChild(containerDiv);
-      console.log(containerDiv);
-    }
+        containerDiv.id = "containerCSS";
+
+        document.body.appendChild(containerDiv);
+        //console.log(containerDiv);
+      }
 
     function uploadImage(event) {
       var image = document.getElementById("output");
       console.log(event.target.files);
 
-      caglaSrc = URL.createObjectURL(event.target.files[0]);
-      createImageElement(caglaSrc, `img`);
+      imgSrc = URL.createObjectURL(event.target.files[0]);
+      createImageElement(imgSrc, `img`);
     }
 
     function apiGetRequest() {
-      axios.get("https://5fb50d82e473ab0016a175c2.mockapi.io/pictureObjects").then((a) => {
-        for (let i = 0; i < a.data.length; i++) {
-          console.log(a.data[i].picture);
-          createImageElement(a.data[i].picture, `img`);
-        }
+      axios.get(`https://5fb50d82e473ab0016a175c2.mockapi.io/users`).then((data) => {
+        // for (let i = 0; i < a.data.length; i++) {
+        //   console.log(a.data[i].picture);
+        //   createImageElement(a.data[i].picture, `img`);
+        // }
+        const pictureData = data.data.map(a => {
+          var usersLength = data.data.length;
+          console.log("users len: " + usersLength);
+          a.pictureId.map(b => {
+            createImageElement(b.picture, 'img');
+          })
+        });
       }
       );
     }
 
+    function apiPostUserRequest() {
+      axios.post(`https://5fb50d82e473ab0016a175c2.mockapi.io/users`, {
+        id: '',
+        name: 'Test User'
+      })
+        .then(function (response) {
+          console.log(response);
+          console.log(usersLength);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    function apiPostPictureRequest() {
+      axios.post(`https://5fb50d82e473ab0016a175c2.mockapi.io/users/${usersLength+1}/pictureObjects`, {
+        id: ``,
+        pictureId: `${usersLength+1}`, // Always sends 1 ??
+        picture: `https://illlustrations.co/static/188160589e999c63c66e0efeaed56ce4/ee604/105-freelancer.png`
+      })
+        .then(function (response) {
+          console.log(usersLength);
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
   </script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <p>
     <input type="file" accept="image/*" name="image" accept="image/png, image/jpeg" id="file"
       onchange="uploadImage(event)" />
   </p>
+  <button onclick="apiGetRequest()" ; style="float: left;" ;>Api Get Request Button</button>
+  <button onclick="apiPostUserRequest()" ; style="float: left;" ;>Api Post User Request Button</button>
+  <button onclick="apiPostPictureRequest()" ; style="float: left;" ;>Api Post Picture Request Button</button>
   <button onclick="createImageElement(`https:cdn.jotfor.ms/assets/img/memberkit/user_guide_images/f1.png?v=0.2`,`img`)"
     ; style="float: left; flex-wrap: wrap;" ;>
     Image
   </button>
-  <button onclick="apiGetRequest()" ; style="float: left; flex-wrap: wrap;" ;>Api Get Request Button</button>
+
 </body>
 
 </html>
