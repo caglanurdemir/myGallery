@@ -53,8 +53,7 @@
         //   createImageElement(a.data[i].picture, `img`);
         // }
         const pictureData = data.data.map(a => {
-          var usersLength = data.data.length;
-          console.log("users len: " + usersLength);
+          usersLength = a.id;
           a.pictureId.map(b => {
             createImageElement(b.picture, 'img');
           })
@@ -78,14 +77,15 @@
     }
 
     function apiPostPictureRequest() {
-      axios.post(`https://5fb50d82e473ab0016a175c2.mockapi.io/users/${usersLength+1}/pictureObjects`, {
+      axios.post(`https://5fb50d82e473ab0016a175c2.mockapi.io/users/${Number(usersLength) + 1}/pictureObjects`, {
         id: ``,
-        pictureId: `${usersLength+1}`, // Always sends 1 ??
+        //pictureId: `${usersLength+1}`, // Always sends 1 ??
+        pictureId: ``,
         picture: `https://illlustrations.co/static/188160589e999c63c66e0efeaed56ce4/ee604/105-freelancer.png`
       })
         .then(function (response) {
-          console.log(usersLength);
           console.log(response);
+          console.log(usersLength);
         })
         .catch(function (error) {
           console.log(error);
